@@ -7,7 +7,7 @@
 int main(int argc, char *argv[])
 {
   if (argc != 2) {
-    printf("Utilisation : %s <fichier_csv>\n", argv[0]);
+    printf("Usage : <file.csv>\n");
     return 1;
   }
   
@@ -17,14 +17,14 @@ int main(int argc, char *argv[])
   int data[9];
   memset(data, 0, sizeof(data));
 
-  // Calcul des fréquences théoriques
+  // Theorical frequencies calculation
   for (int i = 1; i <= 9; i++) {
     expectedFreq[i - 1] = log10(1.0 + (1.0 / i)) * MAX_LENGTH;
   }
 
   readFile(argv[1], data);
 
-  // Calcul des fréquences réelles
+  // Real frequencies calculation
   int total = 0;
   for (int i = 0; i < 9; i++) {
     total += data[i];
@@ -36,6 +36,10 @@ int main(int argc, char *argv[])
   for (int i = 0; i < 9; i++) {
     printf("%.1f\n", observedFreq[i]);
   }
+
+  // Generate chart
+  const char * outputFile = "chart.png";
+  generateChart(expectedFreq, observedFreq, outputFile);
 
   return 0;
 }
