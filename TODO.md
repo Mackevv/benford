@@ -4,3 +4,5 @@
 - [x] Calculate the theorical frequencies according to benford's law
 - [x] Calculate the actual frequencies using the given data set
 - [ ] Generate a graph to compare observed frequencies with theorical frequencies
+- [ ] Implement X² test
+- [ ] Handle case where n < 1
