@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 #include "benford.h"
 
 void readFile(const char* fileName, int *frequencies) 
@@ -15,19 +14,19 @@ void readFile(const char* fileName, int *frequencies)
   char line[MAX_LENGTH];
 
   while(fgets(line, sizeof(line), file) != NULL) {
-    char *token = strtok(line, ";\n");
+    char *token = strtok(line, ",;\n ");
 
     while (token != NULL) {
 
-      int firstDigit = atoi(token);
+      char number[MAX_DIGITS];
+      strncpy(number, token, MAX_DIGITS - 1);
+      number[MAX_DIGITS] = '\0';
 
-      while (firstDigit >= 10) {
-        firstDigit /= 10;
-      }
+      int firstDigit = number[0] - '0';
 
       frequencies[firstDigit - 1]++;
 
-      token = strtok(NULL, ";\n");
+      token = strtok(NULL, ",;\n ");
     }
   }
 
